@@ -5,14 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.io.Serializable;
-
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @Table(name = "client_queue")
-public class ClientQueue implements Serializable {
+public class ClientQueue {
 
     @Id
     @GeneratedValue

@@ -2,20 +2,14 @@ package ru.vsu.cs.zmaev.bankservice.models;
 
 import jakarta.persistence.*;
 
-import java.io.Serializable;
 
 @Table(name = "client")
 @Entity
-public class Client implements Serializable {
+public class Client {
     @Id
-    @GeneratedValue
-    @Column(name = "client_id")
-    private Long clientId;
-
-    @Column(name = "firstname")
+    private long clientId;
     private String firstname;
-
-    @Column(name = "secondname")
     private String secondname;
+
 
 }
