@@ -34,4 +34,8 @@ public class Transaction {
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client clientId;
+
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Clerk clerkId;
 }
