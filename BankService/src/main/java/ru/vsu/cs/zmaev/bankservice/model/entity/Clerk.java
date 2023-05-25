@@ -1,28 +1,25 @@
 package ru.vsu.cs.zmaev.bankservice.model.entity;
 
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Entity
-@Data
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
 @AllArgsConstructor
 @NoArgsConstructor
+@Setter
+@Getter
+@Entity
 @Table(name = "clerk")
 public class Clerk {
-
     @Id
-    @GeneratedValue
-    private Long id;
-
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     @Column(name = "firstname")
-    private String firstname;
-
+    private String firstName;
     @Column(name = "lastname")
-    private String lastname;
-
-    @ManyToOne
-    @JoinColumn(name = "clerk_id")
-    private Transaction transaction;
+    private String lastName;
+    @Column(name = "passport")
+    private String passport;
 }

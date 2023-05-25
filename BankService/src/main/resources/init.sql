@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS bank_transaction(
     clerk_id INTEGER REFERENCES clerk(clerk_id),
     )
 
-CREATE TABLE IF NOT EXISTS completed(
+CREATE TABLE IF NOT EXISTS result(
     client_id INTEGER REFERENCES bank_transaction(client_id),
     clerk_id INTEGER REFERENCES bank_transaction(clerk_id),
     sending_time TIMESTAMP NOT NULL,
