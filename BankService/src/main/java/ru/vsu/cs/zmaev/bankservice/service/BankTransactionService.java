@@ -7,6 +7,8 @@ import ru.vsu.cs.zmaev.bankservice.model.entity.BankTransaction;
 import ru.vsu.cs.zmaev.bankservice.model.entity.Clerk;
 import ru.vsu.cs.zmaev.bankservice.model.entity.Client;
 import ru.vsu.cs.zmaev.bankservice.repository.BankTransactionRepository;
+import ru.vsu.cs.zmaev.bankservice.repository.ClerkRepository;
+import ru.vsu.cs.zmaev.bankservice.repository.ClientRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -17,22 +19,27 @@ public class BankTransactionService {
     private final BankTransactionMapper mapper;
     private final BankTransactionRepository repository;
 
-    public BankTransactionService(BankTransactionMapper mapper, BankTransactionRepository repository) {
+    private final ClientRepository clientRepository;
+    private final ClerkRepository clerkRepository;
+
+    public BankTransactionService(BankTransactionMapper mapper, BankTransactionRepository repository, ClientRepository clientRepository, ClerkRepository clerkRepository) {
         this.mapper = mapper;
         this.repository = repository;
+        this.clientRepository = clientRepository;
+        this.clerkRepository = clerkRepository;
     }
 
     public void saveNew(BankTransactionDto bankTransactionDto) {
         repository.save(mapper.toEntity(bankTransactionDto));
     }
 
-    private BankTransaction createTransaction(Client clt, Clerk clk) {
-        Client client = repository.findClient(clt.getPassport());
-        Clerk clerk = repository.findClerk(clk.getPassport());
-        BankTransaction bankTransaction = new BankTransaction();
+    public BankTransaction createTransaction(BankTransactionDto dto) {
+        Client client = clientRepository.findByPassport(dto.getClient().getPassport()).orElseThrow();
+        Clerk clerk = clerkRepository.findByPassport(dto.getClerk().getPassport()).orElseThrow();
+        BankTransaction bankTransaction = mapper.toEntity(dto);
         bankTransaction.setClient(client);
         bankTransaction.setClerk(clerk);
-        return bankTransaction;
+        return repository.save(bankTransaction);
     }
 
     public List<BankTransactionDto> getAll() {

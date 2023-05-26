@@ -20,11 +20,10 @@ public class ResultService {
         this.mapper = mapper;
     }
 
-    public void saveNew(ResultDto account) {
-        Result newResult = new Result();
-        BankTransaction bankTransaction = repository.findTransactionById(account.getId());
+    public void saveNew(ResultDto resultDto) {
+        Result newResult = mapper.toEntity(resultDto);
+        BankTransaction bankTransaction = repository.findTransactionById(resultDto.getTransactionId());
         newResult.setBankTransaction(bankTransaction);
-        newResult.setTotalProfit(0);
         repository.save(newResult);
     }
 

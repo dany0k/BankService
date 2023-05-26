@@ -6,4 +6,5 @@ import lombok.Data;
 public class ClerkDto {
     private String firstName;
     private String lastName;
+    private String passport;
 }

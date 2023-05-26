@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 import ru.vsu.cs.zmaev.bankservice.model.entity.Client;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Integer> {
@@ -15,4 +16,6 @@ public interface ClientRepository extends JpaRepository<Client, Integer> {
 
     @Query("SELECT c FROM Client c WHERE c.id = :id")
     Client findClientById(Integer id);
+
+    Optional<Client> findByPassport(String passport);
 }

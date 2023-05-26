@@ -21,7 +21,7 @@ public class BankTransactionController {
 
     @PostMapping("/transaction/new")
     public void addNewOperation(@RequestBody BankTransactionDto transactionDto) {
-        service.saveNew(transactionDto);
+        service.createTransaction(transactionDto);
     }
     @GetMapping("/transactions")
     public List<BankTransactionDto> getAllContracts() {
